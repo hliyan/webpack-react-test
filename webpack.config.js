@@ -39,6 +39,15 @@ var common = {
 if(TARGET === 'build') {
   module.exports = merge(common, {
     devtool: 'source-map',
+    module: {
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          loader: 'babel?stage=1',
+          include: path.resolve(ROOT_PATH, 'app')
+        }
+      ]
+    },
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {
@@ -57,6 +66,18 @@ if(TARGET === 'build') {
 
 if(TARGET === 'dev') {
   module.exports = merge(common, {
+    entry: [
+      'webpack/hot/dev-server'
+    ],
+    module: {
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          loaders: ['react-hot', 'babel?stage=1'],
+          include: path.resolve(ROOT_PATH, 'app'),
+        },
+      ],
+    },
     devtool: 'eval'
   });
 }

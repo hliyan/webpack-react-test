@@ -1,5 +1,5 @@
 import React from 'react';
-import Note from './Note';
+import Notes from './Notes';
 
 export default class App extends React.Component {
 
@@ -9,30 +9,15 @@ export default class App extends React.Component {
   }
 
   render() {
-    const notes = [
-      {
-        task: 'Learn webpack'
-      },
-      {
-        task: 'Learn React'
-      },
-      {
-        task: 'Do laundry'
-      }
+    const notes = [{ task: 'Learn webpack'}, 
+        { task: 'Learn React' }, 
+        { task: 'Do laundry' }
     ];
 
     return (
       <div>
-        <ul>{notes.map(this.renderNote)}</ul>
+        <Notes items={notes} />
       </div>
-    );
-  }
-  
-  renderNote(note, i) {
-    return (
-      <li key={`note${i}`}>
-        <Note value={note.task} />
-      </li>
     );
   }
 }

@@ -5,19 +5,40 @@ export default class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.renderNote = this.renderNote.bind(this);
+    this.addItem = this.addItem.bind(this);
+
+    this.state = {
+      notes: [
+        {
+          task: 'Learn webpack'
+        },
+        {
+          task: 'Learn React'
+        },
+        {
+          task: 'Do laundry'
+        }
+      ]
+    };
   }
 
   render() {
-    const notes = [{ task: 'Learn webpack'}, 
-        { task: 'Learn React' }, 
-        { task: 'Do laundry' }
-    ];
+    const notes = this.state.notes;
 
     return (
       <div>
+        <button onClick={this.addItem}>+</button>
         <Notes items={notes} />
       </div>
     );
+  }
+
+  addItem() {
+    console.log('add item');
+    this.setState({
+    notes: this.state.notes.concat([{
+        task: 'New task'
+      }])
+    });
   }
 }

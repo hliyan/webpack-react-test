@@ -48,7 +48,12 @@ export default class App extends React.Component {
   itemEdited(i, task) {
     let notes = this.state.notes;
 
-    notes[i].task = task;
+    if(task) {
+      notes[i].task = task;
+    }
+    else {
+      notes = notes.slice(0, i).concat(notes.slice(i + 1));
+    }
 
     this.setState({
       notes: notes

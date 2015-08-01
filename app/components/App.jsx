@@ -50,11 +50,16 @@ export default class App extends React.Component {
     let notes = this.state.notes;
     const noteIndex = findIndex(notes, 'id', noteId);
 
-    if(noteIndex < 0) {
+    if (noteIndex < 0) {
       return console.warn('Failed to find note', notes, noteId);
     }
 
-    notes[noteIndex].task = task;
+    if (task) {
+      notes[noteIndex].task = task;
+    } else {
+      notes = notes.slice(0, noteIndex).concat(notes.slice(noteIndex + 1));
+    }
+
     this.setState({notes});
   }
 }

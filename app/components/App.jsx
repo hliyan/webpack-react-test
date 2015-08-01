@@ -1,62 +1,29 @@
 import React from 'react';
 import Notes from './Notes';
+import findIndex from '../libs/find_index';
+import uuid from 'node-uuid';
 
 export default class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.addItem = this.addItem.bind(this);
-    this.itemEdited = this.itemEdited.bind(this);
-
-    this.state = {
-      notes: [
-        {
-          task: 'Learn webpack'
-        },
-        {
-          task: 'Learn React'
-        },
-        {
-          task: 'Do laundry'
-        }
-      ]
-    };
-  }
-
   render() {
-    const notes = this.state.notes;
+    const notes = [
+      {
+        id: uuid.v4(),
+        task: 'Learn webpack'
+      },
+      {
+        id: uuid.v4(),
+        task: 'Learn React'
+      },
+      {
+        id: uuid.v4(),
+        task: 'Do laundry'
+      }
+    ];
 
     return (
       <div>
-        <button onClick={this.addItem}>+</button>
-        <Notes
-          items={notes}
-          onEdit={this.itemEdited} />
+        <Notes items={notes} />
       </div>
     );
-  }
-
-  addItem() {
-    console.log('add item');
-    this.setState({
-    notes: this.state.notes.concat([{
-        task: 'New task'
-      }])
-    });
-  }
-
-  itemEdited(i, task) {
-    let notes = this.state.notes;
-
-    if(task) {
-      notes[i].task = task;
-    }
-    else {
-      notes = notes.slice(0, i).concat(notes.slice(i + 1));
-    }
-
-    this.setState({
-      notes: notes
-    });
   }
 }

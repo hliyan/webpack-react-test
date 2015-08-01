@@ -7,6 +7,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.addItem = this.addItem.bind(this);
+    this.itemEdited = this.itemEdited.bind(this);
 
     this.state = {
       notes: [
@@ -31,7 +32,7 @@ export default class App extends React.Component {
     return (
       <div>
         <button onClick={this.addItem}>+</button>
-        <Notes items={notes} />
+        <Notes items={notes} onEdit={this.itemEdited} />
       </div>
     );
   }
@@ -43,5 +44,17 @@ export default class App extends React.Component {
         task: 'New task'
       }])
     });
+  }
+
+  itemEdited(noteId, task) {
+    let notes = this.state.notes;
+    const noteIndex = findIndex(notes, 'id', noteId);
+
+    if(noteIndex < 0) {
+      return console.warn('Failed to find note', notes, noteId);
+    }
+
+    notes[noteIndex].task = task;
+    this.setState({notes});
   }
 }

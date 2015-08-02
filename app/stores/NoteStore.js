@@ -5,7 +5,7 @@ import findIndex from '../libs/find_index';
 class NoteStore {
   constructor() {
     this.bindActions(NoteActions);
-    this.notes = [];
+    this.notes = this.notes || [];
   }
 
   create(note) {

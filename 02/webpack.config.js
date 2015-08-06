@@ -9,6 +9,18 @@ module.exports = {
     path: path.resolve(ROOT_PATH, 'build'),
     filename: 'bundle.js'
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'babel?stage=1',
+        include: path.resolve(ROOT_PATH, 'app')
+      }
+    ]
+  },
   plugins: [
     new HtmlwebpackPlugin({
       title: 'Kanban app'

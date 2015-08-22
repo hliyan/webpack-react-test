@@ -1,11 +1,11 @@
 import React from 'react';
-import Field from './swisher-ui';
+import Input from './ui';
 
 export default class App extends React.Component {
     render() {
         return (
             <div>
-                <Field label="name" value="joe" onKeyPress={this.onKeyPress} />
+                <Input label="name" value="" onKeyPress={this.onKeyPress} />
             </div>
         );
     }
